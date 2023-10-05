@@ -1,10 +1,9 @@
 package com.example.CustomerAPI.Customer;
 
+import com.example.CustomerAPI.Address.Address;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,9 +19,13 @@ public class Customer {
     private String email ;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer" ,
+            orphanRemoval = true)
     private Set<Address> addresses ;
 
+    public Customer(){
+
+    }
     public Customer(long id, String firstName, String lastName, String phoneNumber, String email, Set<Address> addresses) {
 
         this.id = id;
@@ -86,6 +89,14 @@ public class Customer {
 
     public void setAddress(Set<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

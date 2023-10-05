@@ -1,4 +1,7 @@
-package com.example.CustomerAPI.Customer;
+package com.example.CustomerAPI.Address;
+
+import com.example.CustomerAPI.Customer.Customer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -10,19 +13,21 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
     private String type ;
-    private String City ;
+    private String city;
     private String country ;
     private String addressLine ;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "customer_id" , referencedColumnName = "id")
     private Customer customer ;
 
+    public Address(){}
 
     public Address(Long id, String type, String city, String country, String addressLine) {
         this.id = id;
         this.type = type;
-        City = city;
+        this.city = city;
         this.country = country;
         this.addressLine = addressLine;
     }
@@ -44,11 +49,11 @@ public class Address {
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String city) {
-        City = city;
+        this.city = city;
     }
 
     public String getCountry() {
@@ -80,7 +85,7 @@ public class Address {
         return "Address{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
-                ", City='" + City + '\'' +
+                ", City='" + city + '\'' +
                 ", country='" + country + '\'' +
                 ", addressLine='" + addressLine + '\'' +
                 '}';
