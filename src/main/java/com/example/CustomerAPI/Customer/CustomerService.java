@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -24,13 +25,28 @@ public class CustomerService {
         this.addressRepo = addressRepo ;
     }
 
-    public List<Customer> getCustomers( ){
-        return customerRepo.findAll();
+    public HashMap<String, Object>  getCustomers( ){
+        List<Customer>  customers = customerRepo.findAll();
+        HashMap<String, Object> resultMap = new HashMap<>();
+        if (customers.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customers Not Found");
+        }
+        resultMap.put("result", "success");
+        resultMap.put("payload", customers);
+
+        return resultMap;
     }
 
-    public Optional<Customer> getCustomerById(Long customerId){
+    public HashMap<String, Object>   getCustomerById(Long customerId){
+        Optional<Customer> customer =  customerRepo.findById(customerId);
+        HashMap<String, Object> resultMap = new HashMap<>();
+        if (customer.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customer Not Found");
+        }
+        resultMap.put("result", "success");
+        resultMap.put("payload", customer.get());
 
-        return customerRepo.findById(customerId);
+        return resultMap;
     }
 
     public Map<String, String> addNewCustomer(Customer customer){
@@ -47,32 +63,26 @@ public class CustomerService {
     public Map<String, String> createAddressForCustomer(Long customerId, Address address){
         Optional<Customer> customer = customerRepo.findById(customerId);
         Map<String, String> resultMap = new HashMap<>();
-        if (customer.isPresent() ){
-            address.setCustomer(customer.get());
-            addressRepo.save(address);
-            resultMap.put("result", "success");
-            return  resultMap ;
 
+        if (customer.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customer Not Found");
         }
-        resultMap.put("result", "Operation Failed");
-        return resultMap ;
+
+        address.setCustomer(customer.get());
+        addressRepo.save(address);
+        resultMap.put("result", "success");
+        return  resultMap ;
 
     }
-    public Map<String, String> deleteAddressForCustomer(Long customertId, Long addressId){
+    public ResponseEntity<?> deleteAddressForCustomer(Long customertId, Long addressId){
 
         boolean customerExists = customerRepo.existsById(customertId);
         boolean addressExists = addressRepo.existsById(addressId);
 
         Map<String, String> resultMap = new HashMap<>();
-
-        if (!customerExists || !addressExists ){
-            resultMap.put("result", "Operation Failed");
-            resultMap.put("message", "Customer or Address isn't found");
-            return resultMap ;
-        }
         addressRepo.deleteById(addressId);
         resultMap.put("result", "success");
-        return resultMap ;
+        return new ResponseEntity<>(resultMap,HttpStatus.OK);
 
     }
     public Map<String, String> deleteCustomer(Long customerID){
@@ -89,13 +99,28 @@ public class CustomerService {
 
     }
 
-    public Set<Customer> getCustomersByCity(String city) {
-        return customerRepo.findCustomersByCity(city);
+    public HashMap<String, Object>  getCustomersByCity(String city) {
+        Set<Customer> customers = customerRepo.findCustomersByCity(city);
+        HashMap<String, Object> resultMap = new HashMap<>();
+        if (customers.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customer Not Found");
+        }
+        resultMap.put("result", "success");
+        resultMap.put("payload", customers);
+
+        return resultMap;
 
     }
 
-    public Set<Customer> getCustomersByPhonePrefix(int phonePrefix) {
+    public HashMap<String, Object>  getCustomersByPhonePrefix(int phonePrefix) {
+        HashMap<String, Object> resultMap = new HashMap<>();
         String prefixSt = Integer.toString(phonePrefix);
-        return customerRepo.findCustomerByPhoneNumberContaining(prefixSt);
+        Set<Customer> customers = customerRepo.findCustomerByPhoneNumberContaining(prefixSt);
+        if (customers.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customer Not Found");
+        }
+        resultMap.put("result", "success");
+        resultMap.put("payload", customers);
+        return resultMap;
     }
 }

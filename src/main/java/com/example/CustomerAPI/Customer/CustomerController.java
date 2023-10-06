@@ -17,13 +17,15 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<Customer> getCustomers(){
-        return customerService.getCustomers();
+    public ResponseEntity<?>  getCustomers(){
+        Map<String, Object> resultMap = customerService.getCustomers();
+        return new ResponseEntity<>(resultMap,HttpStatus.OK);
     }
 
     @GetMapping("/{customerId}")
-    public Optional<Customer> getCustomersById(@PathVariable Long customerId){
-        return customerService.getCustomerById(customerId);
+    public ResponseEntity<?> getCustomersById(@PathVariable Long customerId){
+        Map<String, Object> resultMap = customerService.getCustomerById(customerId);
+        return new ResponseEntity<>(resultMap,HttpStatus.OK);
     }
     @PostMapping
     public ResponseEntity<?> createNewCustomer(@RequestBody Customer customer){
@@ -39,18 +41,19 @@ public class CustomerController {
 
     @DeleteMapping("/{customerId}/address/{addressId}")
     public ResponseEntity<?> deleteAddressForCustomer(@PathVariable Long customerId,@PathVariable Long addressId){
-        Map<String, String> resultMap = customerService.deleteAddressForCustomer(customerId, addressId);
-        return new ResponseEntity<>(resultMap,HttpStatus.OK);
+        return customerService.deleteAddressForCustomer(customerId, addressId);
     }
 
     @GetMapping("/city/{city}")
-    public Set<Customer> getCustomersByCity(@PathVariable String city){
-        return customerService.getCustomersByCity(city);
+    public ResponseEntity<?> getCustomersByCity(@PathVariable String city){
+        Map<String, Object> resultMap = customerService.getCustomersByCity(city);
+        return new ResponseEntity<>(resultMap,HttpStatus.OK);
     }
 
     @GetMapping("/phone/{phonePrefix}")
-    public Set<Customer> getCustomersByPhonePrefix(@PathVariable int phonePrefix){
-        return customerService.getCustomersByPhonePrefix(phonePrefix);
+    public ResponseEntity<?> getCustomersByPhonePrefix(@PathVariable int phonePrefix){
+        Map<String, Object> resultMap = customerService.getCustomersByPhonePrefix(phonePrefix);
+        return new ResponseEntity<>(resultMap,HttpStatus.OK);
     }
 
 

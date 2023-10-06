@@ -1,10 +1,12 @@
 package com.example.CustomerAPI.Advise;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.ConstraintViolationException;
 import java.util.HashMap;
@@ -31,6 +33,23 @@ public class AppExceptionHandler  {
             errorMap.put("errorMessage" , error.getMessageTemplate()) ;
                 });
         return errorMap ;
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public Map<String, String> emptyResultDataAccessException(EmptyResultDataAccessException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("errorMessage", ex.getMessage());
+        return errorMap;
+    }
+
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ExceptionHandler(ResponseStatusException.class)
+    public Map<String, String> responseStatusException(ResponseStatusException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("errorMessage", ex.getMessage());
+        return errorMap;
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
