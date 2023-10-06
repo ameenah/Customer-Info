@@ -1,11 +1,11 @@
 package com.example.CustomerAPI.Customer;
 
 import com.example.CustomerAPI.Address.Address;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping(path = "api/v1/customer")
@@ -21,25 +21,26 @@ public class CustomerController {
         return customerService.getCustomers();
     }
 
-    @GetMapping("/{customertId}")
-    public Optional<Customer> getCustomersById(@PathVariable Long customertId){
-        return customerService.getCustomerById(customertId);
+    @GetMapping("/{customerId}")
+    public Optional<Customer> getCustomersById(@PathVariable Long customerId){
+        return customerService.getCustomerById(customerId);
     }
     @PostMapping
-    public void createNewCustomer(@RequestBody Customer customer){
-
-        customerService.addNewCustomer(customer);
+    public ResponseEntity<?> createNewCustomer(@RequestBody Customer customer){
+        Map<String, String> resultMap = customerService.addNewCustomer(customer);
+        return new ResponseEntity<>(resultMap,HttpStatus.OK);
     }
 
-    @PostMapping("/{customertId}/address")
-    public void createAddressForCustomer(@PathVariable Long customertId, @RequestBody Address address){
-
-        customerService.createAddressForCustomer(customertId, address);
+    @PostMapping("/{customerId}/address")
+    public ResponseEntity<?> createAddressForCustomer(@PathVariable Long customerId, @RequestBody Address address){
+        Map<String, String> resultMap  = customerService.createAddressForCustomer(customerId, address) ;
+        return new ResponseEntity<>(resultMap,HttpStatus.OK);
     }
 
-    @DeleteMapping("/{customertId}/address/{addressId}")
-    public void deleteAddressForCustomer(@PathVariable Long customertId,@PathVariable Long addressId){
-        customerService.deleteAddressForCustomer(customertId, addressId);
+    @DeleteMapping("/{customerId}/address/{addressId}")
+    public ResponseEntity<?> deleteAddressForCustomer(@PathVariable Long customerId,@PathVariable Long addressId){
+        Map<String, String> resultMap = customerService.deleteAddressForCustomer(customerId, addressId);
+        return new ResponseEntity<>(resultMap,HttpStatus.OK);
     }
 
     @GetMapping("/city/{city}")

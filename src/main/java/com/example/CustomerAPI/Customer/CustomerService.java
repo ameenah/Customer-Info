@@ -3,11 +3,11 @@ package com.example.CustomerAPI.Customer;
 import com.example.CustomerAPI.Address.Address;
 import com.example.CustomerAPI.Address.AddressRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class CustomerService {
@@ -28,46 +28,65 @@ public class CustomerService {
         return customerRepo.findAll();
     }
 
-    public Optional<Customer> getCustomerById(Long customertId){
+    public Optional<Customer> getCustomerById(Long customerId){
 
-        return customerRepo.findById(customertId);
+        return customerRepo.findById(customerId);
     }
 
-    public void addNewCustomer(Customer customer){
-        //TODO parameters Validation
-        customerRepo.save(customer);
-        System.out.println(customer.toString());
+    public Map<String, String> addNewCustomer(Customer customer){
+        Customer result = customerRepo.save(customer);
+        Map<String, String> resultMap = new HashMap<>();
+        if (result != null){
+            resultMap.put("result", "success");
+            return  resultMap ;
+        }
+        resultMap.put("result", "Operation Failed");
+        return resultMap ;
     }
 
-    public void createAddressForCustomer(Long customertId, Address address){
-
-
-        Optional<Customer> customer = customerRepo.findById(customertId);
+    public Map<String, String> createAddressForCustomer(Long customerId, Address address){
+        Optional<Customer> customer = customerRepo.findById(customerId);
+        Map<String, String> resultMap = new HashMap<>();
         if (customer.isPresent() ){
             address.setCustomer(customer.get());
             addressRepo.save(address);
-        }
+            resultMap.put("result", "success");
+            return  resultMap ;
 
+        }
+        resultMap.put("result", "Operation Failed");
+        return resultMap ;
 
     }
-    public void deleteAddressForCustomer(Long customertId, Long addressId){
+    public Map<String, String> deleteAddressForCustomer(Long customertId, Long addressId){
 
         boolean customerExists = customerRepo.existsById(customertId);
         boolean addressExists = addressRepo.existsById(addressId);
 
+        Map<String, String> resultMap = new HashMap<>();
+
         if (!customerExists || !addressExists ){
-            throw  new IllegalStateException("Customer not Exist");
+            resultMap.put("result", "Operation Failed");
+            resultMap.put("message", "Customer or Address isn't found");
+            return resultMap ;
         }
         addressRepo.deleteById(addressId);
+        resultMap.put("result", "success");
+        return resultMap ;
 
     }
-    public void deleteCustomer(Long customerID){
+    public Map<String, String> deleteCustomer(Long customerID){
         boolean exists = customerRepo.existsById(customerID);
+        Map<String, String> resultMap = new HashMap<>();
         if(!exists){
-            throw  new IllegalStateException("Customer not Exist");
+            resultMap.put("message", "Customer found");
+            return resultMap ;
 
         }
         customerRepo.deleteById(customerID);
+        resultMap.put("result", "success");
+        return resultMap ;
+
     }
 
     public Set<Customer> getCustomersByCity(String city) {

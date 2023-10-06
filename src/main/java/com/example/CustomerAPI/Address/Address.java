@@ -4,6 +4,8 @@ import com.example.CustomerAPI.Customer.Customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -12,9 +14,17 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
+    @NotNull(message = "Address type is missing ")
+    @NotBlank(message = "Address type is missing")
     private String type ;
+    @NotNull(message = "city is missing ")
+    @NotBlank(message = "city is missing")
     private String city;
+    @NotNull(message = "country is missing ")
+    @NotBlank(message = "country is missing")
     private String country ;
+    @NotNull(message = "Address Line is missing ")
+    @NotBlank(message = "Address Line is missing")
     private String addressLine ;
 
     @JsonIgnore

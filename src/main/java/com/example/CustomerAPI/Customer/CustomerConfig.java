@@ -14,7 +14,7 @@ public class CustomerConfig {
           Customer a = new Customer(
                   "ameenah",
                   "mohamed",
-                  "090000000",
+                  "0990000000",
 
                   "ameenah.k.a.m@gmail.com"
 
@@ -22,7 +22,7 @@ public class CustomerConfig {
             Customer b = new Customer(
                     "ameenah",
                     "mohamed",
-                    "090000000",
+                    "0990000000",
 
                     "ameenah.k.a.m@gmail.com"
 
@@ -30,7 +30,7 @@ public class CustomerConfig {
             Customer c = new Customer(
                     "ameenah",
                     "mohamed",
-                    "090000000",
+                    "0900000000",
 
                     "ameenah.k.a.m@gmail.com"
 

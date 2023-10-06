@@ -4,6 +4,10 @@ import com.example.CustomerAPI.Address.Address;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Entity
@@ -13,9 +17,15 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id ;
+    @NotNull(message = "First Name is missing ")
+    @NotBlank(message = "First Name is missing")
     private String firstName ;
+    @NotNull(message = "Last Name is missing ")
+    @NotBlank(message = "Last Name is missing")
     private String lastName ;
+    @Pattern(regexp = "^\\d{10}$",message = "Phone Number is invalid ")
     private String phoneNumber ;
+    @Email(message = "Email is invalid")
     private String email ;
 
     @JsonIgnore
@@ -26,15 +36,15 @@ public class Customer {
     public Customer(){
 
     }
-    public Customer(long id, String firstName, String lastName, String phoneNumber, String email, Set<Address> addresses) {
-
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.addresses = addresses;
-    }
+//    public Customer(long id, String firstName, String lastName, String phoneNumber, String email, Set<Address> addresses) {
+//
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.phoneNumber = phoneNumber;
+//        this.email = email;
+//        this.addresses = addresses;
+//    }
 
     public Customer(String firstName, String lastName, String phoneNumber, String email, Set<Address> addresses) {
         this.firstName = firstName;
