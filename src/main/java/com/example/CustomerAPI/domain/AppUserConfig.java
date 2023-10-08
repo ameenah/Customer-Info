@@ -27,6 +27,7 @@ public class AppUserConfig {
           appUserService.saveRole(new Role(null, "ROLE_SUPERADMIN"));
 
           appUserService.saveUser(new AppUser(null , "Ameenah Khalid", "ameenah", "1234", new ArrayList<>() ));
+          appUserService.saveUser(new AppUser(null , "Ameenah Khalid", "kalvad", "1234", new ArrayList<>() ));
 
           appUserService.addRoleToUser("ameenah", "ROLE_SUPERADMIN");
 

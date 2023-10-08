@@ -32,7 +32,7 @@ public class CustomerService {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customers Not Found");
         }
         resultMap.put("result", "success");
-        resultMap.put("payload", customers);
+        resultMap.put("customers", customers);
 
         return resultMap;
     }
@@ -44,7 +44,7 @@ public class CustomerService {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customer Not Found");
         }
         resultMap.put("result", "success");
-        resultMap.put("payload", customer.get());
+        resultMap.put("customer", customer.get());
 
         return resultMap;
     }
@@ -106,7 +106,7 @@ public class CustomerService {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customer Not Found");
         }
         resultMap.put("result", "success");
-        resultMap.put("payload", customers);
+        resultMap.put("customers", customers);
 
         return resultMap;
 
@@ -120,7 +120,7 @@ public class CustomerService {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customer Not Found");
         }
         resultMap.put("result", "success");
-        resultMap.put("payload", customers);
+        resultMap.put("customers", customers);
         return resultMap;
     }
 }
