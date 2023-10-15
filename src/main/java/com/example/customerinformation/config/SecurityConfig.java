@@ -1,5 +1,7 @@
-package com.example.customerinformation.security;
+package com.example.customerinformation.config;
 
+import com.example.customerinformation.security.CustomAuthenticationFilter;
+import com.example.customerinformation.security.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,5 +1,8 @@
-package com.example.customerinformation.domain;
+package com.example.customerinformation.config;
 
+import com.example.customerinformation.services.AppUserService;
+import com.example.customerinformation.models.Role;
+import com.example.customerinformation.models.AppUser;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

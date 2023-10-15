@@ -1,9 +1,12 @@
-package com.example.customerinformation.domain;
+package com.example.customerinformation.controllers;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.customerinformation.services.AppUserService;
+import com.example.customerinformation.models.Role;
+import com.example.customerinformation.models.AppUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

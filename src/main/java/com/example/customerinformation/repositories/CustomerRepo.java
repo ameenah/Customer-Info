@@ -1,5 +1,6 @@
-package com.example.customerinformation.customer;
+package com.example.customerinformation.repositories;
 
+import com.example.customerinformation.models.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

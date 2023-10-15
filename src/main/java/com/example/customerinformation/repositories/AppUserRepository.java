@@ -1,5 +1,6 @@
-package com.example.customerinformation.domain;
+package com.example.customerinformation.repositories;
 
+import com.example.customerinformation.models.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {

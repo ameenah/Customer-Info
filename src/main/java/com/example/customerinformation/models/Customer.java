@@ -1,6 +1,6 @@
-package com.example.customerinformation.customer;
+package com.example.customerinformation.models;
 
-import com.example.customerinformation.address.Address;
+import com.example.customerinformation.models.Address;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

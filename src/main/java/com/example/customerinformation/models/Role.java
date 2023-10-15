@@ -1,4 +1,4 @@
-package com.example.customerinformation.domain;
+package com.example.customerinformation.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

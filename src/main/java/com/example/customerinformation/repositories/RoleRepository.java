@@ -1,5 +1,6 @@
-package com.example.customerinformation.domain;
+package com.example.customerinformation.repositories;
 
+import com.example.customerinformation.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {

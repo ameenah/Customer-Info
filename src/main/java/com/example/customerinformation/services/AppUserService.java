@@ -1,5 +1,9 @@
-package com.example.customerinformation.domain;
+package com.example.customerinformation.services;
 
+import com.example.customerinformation.models.Role;
+import com.example.customerinformation.repositories.RoleRepository;
+import com.example.customerinformation.models.AppUser;
+import com.example.customerinformation.repositories.AppUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -45,7 +49,7 @@ public class AppUserService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return  appUserRepository.save(user);
     }
-    public  Role saveRole(Role role){
+    public Role saveRole(Role role){
         log.info("Saving new Role {} to DB", role.getName());
         return roleRepository.save(role);
     }

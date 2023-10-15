@@ -1,6 +1,8 @@
-package com.example.customerinformation.customer;
+package com.example.customerinformation.controllers;
 
-import com.example.customerinformation.address.Address;
+import com.example.customerinformation.services.CustomerService;
+import com.example.customerinformation.models.Address;
+import com.example.customerinformation.models.Customer;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;

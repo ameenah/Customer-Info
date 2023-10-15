@@ -1,6 +1,5 @@
-package com.example.customerinformation.address;
+package com.example.customerinformation.models;
 
-import com.example.customerinformation.customer.Customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;

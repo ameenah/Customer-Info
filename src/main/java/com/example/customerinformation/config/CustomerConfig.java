@@ -1,7 +1,9 @@
-package com.example.customerinformation.customer;
+package com.example.customerinformation.config;
 
-import com.example.customerinformation.address.Address;
-import com.example.customerinformation.address.AddressRepo;
+import com.example.customerinformation.models.Address;
+import com.example.customerinformation.models.Customer;
+import com.example.customerinformation.repositories.AddressRepo;
+import com.example.customerinformation.repositories.CustomerRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

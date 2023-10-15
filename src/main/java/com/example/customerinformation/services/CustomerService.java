@@ -1,7 +1,9 @@
-package com.example.customerinformation.customer;
+package com.example.customerinformation.services;
 
-import com.example.customerinformation.address.Address;
-import com.example.customerinformation.address.AddressRepo;
+import com.example.customerinformation.models.Address;
+import com.example.customerinformation.models.Customer;
+import com.example.customerinformation.repositories.AddressRepo;
+import com.example.customerinformation.repositories.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
