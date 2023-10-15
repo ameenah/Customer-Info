@@ -42,6 +42,21 @@ public class Address {
         this.addressLine = addressLine;
     }
 
+    public Address(String type, String city, String country, String addressLine) {
+        this.type = type;
+        this.city = city;
+        this.country = country;
+        this.addressLine = addressLine;
+    }
+
+    public Address( String type, String city, String country, String addressLine, Customer customer) {
+        this.type = type;
+        this.city = city;
+        this.country = country;
+        this.addressLine = addressLine;
+        this.customer = customer;
+    }
+
     public Long getId() {
         return id;
     }
