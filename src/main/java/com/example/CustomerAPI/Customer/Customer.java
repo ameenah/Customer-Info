@@ -1,14 +1,14 @@
 package com.example.CustomerAPI.Customer;
 
 import com.example.CustomerAPI.Address.Address;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -31,7 +31,7 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer" ,
             orphanRemoval = true)
-    private Set<Address> addresses ;
+    private List<Address> addresses ;
 
     public Customer(){
 
@@ -46,7 +46,7 @@ public class Customer {
 //        this.addresses = addresses;
 //    }
 
-    public Customer(String firstName, String lastName, String phoneNumber, String email, Set<Address> addresses) {
+    public Customer(String firstName, String lastName, String phoneNumber, String email, ArrayList<Address>  addresses) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -93,11 +93,11 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Address> getAddress() {
+    public List<Address>  getAddress() {
         return addresses;
     }
 
-    public void setAddress(Set<Address> addresses) {
+    public void setAddress(List<Address>  addresses) {
         this.addresses = addresses;
     }
 

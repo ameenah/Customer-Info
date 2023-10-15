@@ -4,7 +4,6 @@ import com.example.CustomerAPI.Address.Address;
 import com.example.CustomerAPI.Address.AddressRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -25,108 +24,75 @@ public class CustomerService {
         this.addressRepo = addressRepo ;
     }
 
-    public HashMap<String, Object>  getCustomers( ){
+    public List<Customer>  getCustomers( ){
         List<Customer>  customers = customerRepo.findAll();
-        HashMap<String, Object> resultMap = new HashMap<>();
         if (customers.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customers Not Found");
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT );
         }
-        resultMap.put("result", "success");
-        resultMap.put("customers", customers);
-
-        return resultMap;
+        return customers;
     }
 
-    public HashMap<String, Object>   getCustomerById(Long customerId){
+    public Optional<Customer>   getCustomerById(Long customerId){
         Optional<Customer> customer =  customerRepo.findById(customerId);
-        HashMap<String, Object> resultMap = new HashMap<>();
         if (customer.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customer Not Found");
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT );
         }
-        resultMap.put("result", "success");
-        resultMap.put("customer", customer.get());
-
-        return resultMap;
+        return customer;
     }
 
-    public Map<String, String> addNewCustomer(Customer customer){
+    public void addNewCustomer(Customer customer){
         Customer customerResult = customerRepo.save(customer);
 
         for (Address add: customer.getAddress()) {
             add.setCustomer(customer);
             addressRepo.save(add);
         }
-
         Map<String, String> resultMap = new HashMap<>();
-        if (customerResult != null){
-            resultMap.put("result", "success");
-            return  resultMap ;
+        if (customerResult == null){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR );
         }
-        resultMap.put("result", "Operation Failed");
-        return resultMap ;
     }
 
-    public Map<String, String> createAddressForCustomer(Long customerId, Address address){
+    public void createAddressForCustomer(Long customerId, Address address){
         Optional<Customer> customer = customerRepo.findById(customerId);
-        Map<String, String> resultMap = new HashMap<>();
-
         if (customer.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customer Not Found");
         }
-
         address.setCustomer(customer.get());
         addressRepo.save(address);
-        resultMap.put("result", "success");
-        return  resultMap ;
-
     }
-    public ResponseEntity<?> deleteAddressForCustomer(Long customertId, Long addressId){
+    public void deleteAddressForCustomer(Long customertId, Long addressId){
 
-        boolean customerExists = customerRepo.existsById(customertId);
-        boolean addressExists = addressRepo.existsById(addressId);
-
-        Map<String, String> resultMap = new HashMap<>();
+        Customer customer = customerRepo.getById(customertId);
+        List <Address> addressesList = customer.getAddress();
+        if (customer == null){
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT );
+        }
         addressRepo.deleteById(addressId);
-        resultMap.put("result", "success");
-        return new ResponseEntity<>(resultMap,HttpStatus.OK);
-
     }
-    public Map<String, String> deleteCustomer(Long customerID){
+    public void deleteCustomer(Long customerID){
         boolean exists = customerRepo.existsById(customerID);
-        Map<String, String> resultMap = new HashMap<>();
         if(!exists){
-            resultMap.put("message", "Customer found");
-            return resultMap ;
-
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT );
         }
         customerRepo.deleteById(customerID);
-        resultMap.put("result", "success");
-        return resultMap ;
-
     }
 
-    public HashMap<String, Object>  getCustomersByCity(String city) {
+    public Set<Customer>  getCustomersByCity(String city) {
         Set<Customer> customers = customerRepo.findCustomersByCity(city);
-        HashMap<String, Object> resultMap = new HashMap<>();
         if (customers.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customer Not Found");
         }
-        resultMap.put("result", "success");
-        resultMap.put("customers", customers);
-
-        return resultMap;
+        return customers;
 
     }
 
-    public HashMap<String, Object>  getCustomersByPhonePrefix(int phonePrefix) {
-        HashMap<String, Object> resultMap = new HashMap<>();
+    public Set<Customer> getCustomersByPhonePrefix(int phonePrefix) {
         String prefixSt = Integer.toString(phonePrefix);
         Set<Customer> customers = customerRepo.findCustomerByPhoneNumberContaining(prefixSt);
         if (customers.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Customer Not Found");
         }
-        resultMap.put("result", "success");
-        resultMap.put("customers", customers);
-        return resultMap;
+        return customers;
     }
 }

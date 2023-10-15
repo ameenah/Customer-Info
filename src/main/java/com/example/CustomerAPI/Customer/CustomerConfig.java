@@ -31,7 +31,7 @@ public class CustomerConfig {
                   "223th st",
                   a
           );
-          a.setAddress(Set.of(address));
+          a.setAddress(List.of(address));
 
             Customer b = new Customer(
                     "ameenah",

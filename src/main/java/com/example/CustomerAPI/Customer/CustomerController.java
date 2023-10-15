@@ -1,8 +1,6 @@
 package com.example.CustomerAPI.Customer;
 
 import com.example.CustomerAPI.Address.Address;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -17,43 +15,37 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<?>  getCustomers(){
-        Map<String, Object> resultMap = customerService.getCustomers();
-        return new ResponseEntity<>(resultMap,HttpStatus.OK);
+    public List<Customer> getCustomers(){
+        return  customerService.getCustomers();
     }
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<?> getCustomersById(@PathVariable Long customerId){
-        Map<String, Object> resultMap = customerService.getCustomerById(customerId);
-        return new ResponseEntity<>(resultMap,HttpStatus.OK);
+    public Optional<Customer> getCustomersById(@PathVariable Long customerId){
+        return customerService.getCustomerById(customerId);
     }
     @PostMapping
-    public ResponseEntity<?> createNewCustomer(@RequestBody Customer customer){
-        Map<String, String> resultMap = customerService.addNewCustomer(customer);
-        return new ResponseEntity<>(resultMap,HttpStatus.OK);
+    public void createNewCustomer(@RequestBody Customer customer){
+         customerService.addNewCustomer(customer);
     }
 
     @PostMapping("/{customerId}/address")
-    public ResponseEntity<?> createAddressForCustomer(@PathVariable Long customerId, @RequestBody Address address){
-        Map<String, String> resultMap  = customerService.createAddressForCustomer(customerId, address) ;
-        return new ResponseEntity<>(resultMap,HttpStatus.OK);
+    public void createAddressForCustomer(@PathVariable Long customerId, @RequestBody Address address){
+        customerService.createAddressForCustomer(customerId, address) ;
     }
 
     @DeleteMapping("/{customerId}/address/{addressId}")
-    public ResponseEntity<?> deleteAddressForCustomer(@PathVariable Long customerId,@PathVariable Long addressId){
-        return customerService.deleteAddressForCustomer(customerId, addressId);
+    public void deleteAddressForCustomer(@PathVariable Long customerId,@PathVariable Long addressId){
+        customerService.deleteAddressForCustomer(customerId, addressId);
     }
 
     @GetMapping("/city/{city}")
-    public ResponseEntity<?> getCustomersByCity(@PathVariable String city){
-        Map<String, Object> resultMap = customerService.getCustomersByCity(city);
-        return new ResponseEntity<>(resultMap,HttpStatus.OK);
+    public Set<Customer> getCustomersByCity(@PathVariable String city){
+        return  customerService.getCustomersByCity(city);
     }
 
     @GetMapping("/phone/{phonePrefix}")
-    public ResponseEntity<?> getCustomersByPhonePrefix(@PathVariable int phonePrefix){
-        Map<String, Object> resultMap = customerService.getCustomersByPhonePrefix(phonePrefix);
-        return new ResponseEntity<>(resultMap,HttpStatus.OK);
+    public Set<Customer> getCustomersByPhonePrefix(@PathVariable int phonePrefix){
+        return customerService.getCustomersByPhonePrefix(phonePrefix);
     }
 
 
