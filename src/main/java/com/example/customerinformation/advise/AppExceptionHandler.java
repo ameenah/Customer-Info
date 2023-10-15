@@ -1,4 +1,4 @@
-package com.example.CustomerAPI.Advise;
+package com.example.customerinformation.advise;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;

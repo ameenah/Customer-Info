@@ -1,4 +1,4 @@
-package com.example.CustomerAPI.domain;
+package com.example.customerinformation.domain;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -27,9 +27,10 @@ public class AppUserConfig {
           appUserService.saveRole(new Role(null, "ROLE_SUPERADMIN"));
 
           appUserService.saveUser(new AppUser(null , "Ameenah Khalid", "ameenah", "1234", new ArrayList<>() ));
-          appUserService.saveUser(new AppUser(null , "Ameenah Khalid", "kalvad", "1234", new ArrayList<>() ));
+          appUserService.saveUser(new AppUser(null , "kalvad", "kalvad", "1234", new ArrayList<>() ));
 
-          appUserService.addRoleToUser("ameenah", "ROLE_SUPERADMIN");
+   //       appUserService.addRoleToUser("ameenah", "ROLE_SUPERADMIN");
+            appUserService.addRoleToUser("kalvad", "ROLE_SUPERADMIN");
 
 
         };

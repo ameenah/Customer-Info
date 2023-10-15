@@ -1,4 +1,4 @@
-package com.example.CustomerAPI.Customer;
+package com.example.customerinformation.customer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package com.example.CustomerAPI.domain;
+package com.example.customerinformation.domain;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

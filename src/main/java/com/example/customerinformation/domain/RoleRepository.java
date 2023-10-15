@@ -1,4 +1,4 @@
-package com.example.CustomerAPI.domain;
+package com.example.customerinformation.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.example.CustomerAPI.domain;
+package com.example.customerinformation.domain;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

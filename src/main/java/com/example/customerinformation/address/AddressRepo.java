@@ -1,4 +1,4 @@
-package com.example.CustomerAPI.Address;
+package com.example.customerinformation.address;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

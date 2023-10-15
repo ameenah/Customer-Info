@@ -1,4 +1,4 @@
-package com.example.CustomerAPI.security;
+package com.example.customerinformation.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,6 @@
-package com.example.CustomerAPI.Customer;
+package com.example.customerinformation.customer;
 
-import com.example.CustomerAPI.Address.Address;
+import com.example.customerinformation.address.Address;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;

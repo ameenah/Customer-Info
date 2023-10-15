@@ -1,7 +1,7 @@
-package com.example.CustomerAPI.Customer;
+package com.example.customerinformation.customer;
 
-import com.example.CustomerAPI.Address.Address;
-import com.example.CustomerAPI.Address.AddressRepo;
+import com.example.customerinformation.address.Address;
+import com.example.customerinformation.address.AddressRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

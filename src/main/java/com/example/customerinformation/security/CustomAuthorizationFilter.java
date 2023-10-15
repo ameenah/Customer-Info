@@ -1,4 +1,4 @@
-package com.example.CustomerAPI.security;
+package com.example.customerinformation.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
