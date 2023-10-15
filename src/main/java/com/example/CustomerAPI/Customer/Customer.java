@@ -28,7 +28,7 @@ public class Customer {
     @Email(message = "Email is invalid")
     private String email ;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "customer" ,
             orphanRemoval = true)
     private Set<Address> addresses ;

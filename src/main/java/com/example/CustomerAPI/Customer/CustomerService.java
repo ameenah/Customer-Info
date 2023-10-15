@@ -50,9 +50,15 @@ public class CustomerService {
     }
 
     public Map<String, String> addNewCustomer(Customer customer){
-        Customer result = customerRepo.save(customer);
+        Customer customerResult = customerRepo.save(customer);
+
+        for (Address add: customer.getAddress()) {
+            add.setCustomer(customer);
+            addressRepo.save(add);
+        }
+
         Map<String, String> resultMap = new HashMap<>();
-        if (result != null){
+        if (customerResult != null){
             resultMap.put("result", "success");
             return  resultMap ;
         }
